@@ -1,0 +1,33 @@
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title>Таймер</title>
+		<script src="Timer.js"></script>
+		<script src="Storage.js"></script>
+	</head>
+
+<body>
+
+	<script type='text/javascript'>
+		var obj_storage, obj_timer;
+		window.onload = function() {
+			obj_storage = new STORAGE({'type':'session'});
+			obj_timer = new TIMER({'start':0, 'save':1, 'lastsave':1, 'key':'example_timer', 'usercycle': function(time) {document.querySelector("#timer").value = time;}, 'format':1, 'usersave': function(key, data) {return obj_storage.setData(key, data);}, 'userget': function(key) {return obj_storage.getData(key);}, });
+			//obj_timer = new TIMER({'start':1,'usercycle':function(time) {document.querySelector("#timer").value = time;}});
+		}
+	</script>
+
+
+	<input id="timer" />
+	<br>
+	<input type='button' id='pause' value='pause' onclick='obj_timer.pauseTimer();'>
+	<br>
+	<br>
+	<input type='button' id='start' value='start' onclick='obj_timer.startTimer();'>
+	<br>
+	<input type='button' id='stop' value='stop' onclick='obj_timer.stopTimer();'>
+	<br>
+	<input type='button' id='reload' value='reload' onclick='obj_timer.reloadTimer();'>
+
+</body>
